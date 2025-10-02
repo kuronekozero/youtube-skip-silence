@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>YouTube Silence Skipper</title>
+  <link rel="icon" href="icons/icon32.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;500;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      width: 320px;
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      font-size: 13px;
+    }
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 22px 18px 0 18px;
+    }
+    .logo-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+      justify-content: center;
+    }
+    .logo-bar img {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+      background: #fff;
+      padding: 4px;
+    }
+    .logo-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+      text-shadow: 0 2px 8px #0002;
+      text-transform: lowercase;
+    }
+    .settings-list {
+      background: rgba(30, 32, 36, 0.98);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #0003;
+      padding: 18px 16px 10px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .setting-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .setting-label {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #f5f5f5;
+      letter-spacing: 0.1px;
+      display: block;
+      text-align: left;
+      margin-bottom: 0;
+    }
+    .setting-desc {
+      font-size: 11px;
+      color: #b0bec5;
+      font-weight: 400;
+      margin-top: 2px;
+      margin-bottom: 0;
+      line-height: 1.3;
+      max-width: 170px;
+      text-align: left;
+    }
+    .switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #444b5a;
+      border-radius: 24px;
+      transition: background 0.2s;
+    }
+    .slider:before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      transition: 0.2s;
+      box-shadow: 0 2px 6px #0002;
+    }
+    .switch input:checked + .slider {
+      background: linear-gradient(90deg, #7ecfff 0%, #3a8dde 100%);
+    }
+    .switch input:checked + .slider:before {
+      transform: translateX(20px);
+      background: #e3f2fd;
+    }
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+      position: relative;
+    }
+    .number-input-wrapper {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 70px;
+      min-width: 70px;
+      max-width: 70px;
+    }
+    input[type="number"] {
+      width: 44px;
+      height: 24px;
+      padding: 0 7px 0 7px;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 8px;
+      background: #23272e;
+      color: #e0e0e0;
+      font-weight: 400;
+      box-shadow: 0 1px 3px #0002;
+      outline: none;
+      transition: background 0.2s, color 0.2s;
+      appearance: textfield;
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      margin-right: 0;
+    }
+    input[type="number"]:focus {
+      background: #3a8dde33;
+      color: #fff;
+    }
+    /* Hide default spinners */
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+      display: none;
+    }
+    input[type="number"]::-moz-focus-inner {
+      border: 0;
+    }
+    input[type="number"]::-moz-focus-outer {
+      border: 0;
+    }
+    /* Custom spinner buttons */
+    .custom-spinner {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      justify-content: center;
+      z-index: 2;
+    }
+    .spinner-btn {
+      width: 18px;
+      height: 12px;
+      background: #23272e;
+      color: #7ecfff;
+      border: none;
+      border-radius: 3px;
+      font-size: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .spinner-btn:active {
+      background: #3a8dde33;
+      color: #fff;
+    }
+    .spinner-btn:focus {
+      outline: none;
+    }
+    .input-unit {
+      font-size: 0.9rem;
+      color: #7ecfff;
+      font-weight: 600;
+      margin-left: 4px;
+      white-space: nowrap;
+      min-width: 22px;
+      max-width: 30px;
+      overflow: visible;
+    }
+    .select-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-top: 2px;
+      width: 100px;
+    }
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 100%;
+      height: 24px;
+      padding: 0 20px 0 7px;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 8px;
+      background: #23272e;
+      color: #e0e0e0;
+      font-weight: 500;
+      box-shadow: 0 1px 3px #0002;
+      outline: none;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    select:focus {
+      background: #3a8dde33;
+      color: #fff;
+    }
+    .select-wrapper::after {
+      content: '▼';
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #7ecfff;
+      font-size: 10px;
+      pointer-events: none;
+    }
+    /* Force dark mode for select dropdown (Firefox/Chromium) */
+    select, select option, select optgroup {
+      background: #23272e !important;
+      color: #e0e0e0 !important;
+    }
+    @media (prefers-color-scheme: dark) {
+      select, select option, select optgroup {
+        background: #23272e !important;
+        color: #e0e0e0 !important;
+      }
+    }
+    .action-section {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0 0 0;
+    }
+    .btn {
+      padding: 8px 26px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #232526;
+      background: linear-gradient(90deg, #7ecfff 0%, #3a8dde 100%);
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.12s;
+      box-shadow: 0 2px 8px #0002;
+      letter-spacing: 0.5px;
+    }
+    .btn:active {
+      background: linear-gradient(90deg, #3a8dde 0%, #7ecfff 100%);
+      transform: scale(0.98);
+    }
+    .btn:disabled {
+      background: #444b5a;
+      color: #888;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .footer {
+      text-align: center;
+      padding: 14px 0 10px 0;
+      font-size: 10px;
+      color: #b0bec5;
+      background: none;
+      border-radius: 0 0 18px 18px;
+      box-shadow: none;
+      margin-top: auto;
+    }
+    .footer a {
+      color: #7ecfff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.18s;
+      font-size: 11px;
+    }
+    .footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="logo-bar">
+      <img src="icons/icon128.png" alt="Logo">
+      <span class="logo-title">skip youtube silence</span>
+    </div>
+    <div class="settings-list">
+      <div class="setting-row">
+        <div>
+          <span class="setting-label">Auto Skip Silence</span>
+          <div class="setting-desc">Automatically skip silent periods between captions.</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="skipToggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div>
+          <span class="setting-label">Skip After Seek</span>
+          <div class="setting-desc">Continue auto-skip after manually seeking video.</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="skipAfterSeekToggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div>
+          <span class="setting-label">Skip Non-Speech</span>
+          <div class="setting-desc">Skip non-verbal audio elements like [music], (sound effects).</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="skipCCCaptionsToggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div>
+          <span class="setting-label">Min Skip</span>
+          <div class="setting-desc">Skip only gaps longer than this duration.</div>
+        </div>
+        <div class="input-group">
+          <span class="number-input-wrapper">
+            <input type="number" id="minSkipInput" min="0" step="0.05" />
+            <span class="custom-spinner">
+              <button type="button" class="spinner-btn" data-spin="up">▲</button>
+              <button type="button" class="spinner-btn" data-spin="down">▼</button>
+            </span>
+          </span>
+          <span class="input-unit">sec</span>
+        </div>
+      </div>
+      <div class="setting-row">
+        <div>
+          <span class="setting-label">Pre-speech Offset</span>
+          <div class="setting-desc">Skip to this many seconds BEFORE the next speech moment.</div>
+        </div>
+        <div class="input-group">
+          <span class="number-input-wrapper">
+            <input type="number" id="preSpeechOffsetInput" min="0" step="0.05" />
+            <span class="custom-spinner">
+              <button type="button" class="spinner-btn" data-spin="up">▲</button>
+              <button type="button" class="spinner-btn" data-spin="down">▼</button>
+            </span>
+          </span>
+          <span class="input-unit">sec</span>
+        </div>
+      </div>
+      <div class="setting-row">
+        <div>
+          <span class="setting-label">Post-speech Offset</span>
+          <div class="setting-desc">Start skipping this many seconds AFTER the silence begins.</div>
+        </div>
+        <div class="input-group">
+          <span class="number-input-wrapper">
+            <input type="number" id="postSilenceDelayInput" min="0" step="0.05" />
+            <span class="custom-spinner">
+              <button type="button" class="spinner-btn" data-spin="up">▲</button>
+              <button type="button" class="spinner-btn" data-spin="down">▼</button>
+            </span>
+          </span>
+          <span class="input-unit">sec</span>
+        </div>
+      </div>
+      <div class="setting-row">
+        <div>
+          <span class="setting-label">Log Level</span>
+          <div class="setting-desc">Control the amount of debug information displayed.</div>
+        </div>
+        <div class="select-wrapper">
+          <select id="logLevelSelect">
+            <option value="none">None</option>
+            <option value="default">Default</option>
+            <option value="debug">Debug</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="action-section">
+      <button id="applyBtn" class="btn">Save</button>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="https://github.com/kuronekozero/youtube-skip-silence" target="_blank">Homepage</a>
+  </div>
+  <script src="shared-constants.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

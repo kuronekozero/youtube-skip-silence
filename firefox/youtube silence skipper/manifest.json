@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "YouTube Silence Skipper",
+  "version": "1.0",
+  "description": "Automatically skips silent periods in YouTube videos for a smoother viewing experience.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["webRequest", "webRequestBlocking", "activeTab", "storage", "https://www.youtube.com/*"],
+  "browser_action": {
+    "default_title": "YouTube Silence Skipper",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "scripts": ["shared-constants.js", "background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["shared-constants.js", "content.js"],
+      "css": ["toast.css"]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "youtube-silence-skipper@example.com"
+    }
+  }
+}
