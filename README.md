@@ -9,81 +9,81 @@
 
 ---
 
-## 🎬 Video Demonstration
+## 🎬 Demonstration
 
-See **YouTube Skip Silence** in action! This short video demonstrates how the extension automatically detects and skips silent gaps in a video, saving you time.
+This GIF shows **YouTube Skip Silence** in action. The extension automatically detects and skips silent sections of a video.
 
 <div align="center">
-  <video src="./video.mp4" controls width="100%" poster="./icon.png"></video>
+  <img src="./demonstration.gif" alt="YouTube Skip Silence Extension Demonstration GIF" width="600"/>
 </div>
 
 ---
 
-**YouTube Skip Silence** is a browser extension that detects and automatically skips silent portions of YouTube videos. It functions by analyzing the timestamps of a video's **auto-generated captions** to efficiently identify periods without speech.
+**YouTube Skip Silence** is a browser extension that skips silent parts of YouTube videos. It works by analyzing the timestamps in a video's **auto-generated captions** to find periods with no speech.
 
-This extension is available for both **Google Chrome** (and Chromium-based browsers) and **Mozilla Firefox**.
+The extension is available for **Google Chrome** (and other Chromium browsers) and **Mozilla Firefox**.
 
 ## ✨ Features
 
-The extension is designed to provide a seamless viewing experience by eliminating dead air, with several configurable options:
+The extension is designed to remove dead air with simple configuration options:
 
-* **Silence Skipping:** The core function is to automatically jump over segments of a video where no speech is detected.
-* **Customizable Skip Behavior:** Fine-tune how the extension performs skips for a more natural flow:
-    * **Post-Speech Delay:** A configurable delay can be added after a line of speech concludes before a skip is initiated. This creates a more natural pause instead of an immediate jump.
-    * **Pre-Speech Offset:** Configure the skip to land a specific amount of time *before* the next line of speech begins, avoiding an abrupt start.
-* **General Settings:** The extension's popup menu provides controls to:
-    * Enable or disable skipping entirely.
-    * Define the **minimum duration of silence** that should be skipped.
-    * Control whether skipping continues after the user manually seeks to a new point in the video.
+* **Silence Skipping:** The main feature is automatically jumping over segments where no speech is detected.
+* **Custom Skip Settings:** You can adjust how the skipping works for a smoother experience:
+    * **Post-Speech Delay:** Adds a short delay after someone stops speaking before a skip is initiated.
+    * **Pre-Speech Offset:** Configures the skip to land a moment *before* the next speech starts, preventing an abrupt beginning.
+* **General Controls:** The popup menu provides settings to:
+    * Enable or disable the skipping feature.
+    * Set the **minimum duration of silence** that should be skipped.
+    * Control if skipping continues after you manually seek (jump) to a new point in the video.
 
 ---
 
 ## 🛠️ Installation Guide
 
-This extension is not yet available on official browser stores and must be **installed manually** using the "unpacked" method.
+This extension is not available on official browser stores yet, so it must be **installed manually** using the "unpacked" method.
 
 ### For Google Chrome (and Chromium-based browsers)
 
-1.  **Download the Code:** Download the repository from GitHub as a ZIP file.
-2.  **Unzip the File:** Extract the contents of the ZIP file to a permanent folder on your computer. You will see two sub-folders: `chrome` and `firefox`.
-3.  **Open Chrome Extensions:** Open Google Chrome and navigate to `chrome://extensions` in the address bar.
-4.  **Enable Developer Mode:** In the top-right corner of the extensions page, activate the **"Developer mode"** toggle.
+1.  **Download the Code:** Get the repository from GitHub as a ZIP file.
+2.  **Unzip the File:** Extract the ZIP file contents to a permanent folder. You will see two folders: `chrome` and `firefox`.
+3.  **Open Chrome Extensions:** Go to `chrome://extensions` in your address bar.
+4.  **Enable Developer Mode:** In the top-right, switch on the **"Developer mode"** toggle.
 5.  **Load the Extension:**
     * Click the **"Load unpacked"** button.
-    * In the file selection window, navigate to and select the **`chrome`** folder from the files you unzipped.
+    * Select the **`chrome`** folder from your unzipped files.
     * Click "Select Folder".
-    * The extension will now be installed and active.
+    * The extension is now installed and active.
 
 ### For Mozilla Firefox
 
-1.  **Download the Code:** Download the repository from GitHub as a ZIP file.
-2.  **Unzip the File:** Extract the contents of the ZIP file to a folder on your computer.
-3.  **Open Firefox Debugging:** Open Mozilla Firefox and navigate to `about:debugging#/runtime/this-firefox` in the address bar.
+1.  **Download the Code:** Get the repository from GitHub as a ZIP file.
+2.  **Unzip the File:** Extract the ZIP file contents to a folder on your computer.
+3.  **Open Firefox Debugging:** Go to `about:debugging#/runtime/this-firefox` in your address bar.
 4.  **Load Temporary Add-on:**
     * Click the **"Load Temporary Add-on..."** button.
     * Navigate into the unzipped **`firefox`** folder.
     * Select the **`manifest.json`** file and click "Open".
 
-> **Note for Firefox Users:** Temporary add-ons are removed when Firefox is closed. The add-on must be loaded again each time the browser is restarted.
+> **Note for Firefox Users:** Temporary add-ons are removed when Firefox closes. You must load the add-on again each time the browser restarts.
 
 ---
 
 ## 📂 Project Structure
 
-For those interested in modifying or contributing to the code, here is an overview of the project's key file structure:
+This section outlines the main files for those who want to modify the code:
 
 | File Name | Description |
 | :--- | :--- |
-| **`manifest.json`** | The core configuration file for the extension. It declares permissions, registers scripts, and defines the user interface components. |
-| **`background.js`** | A background script that intercepts network requests to capture the URLs for YouTube's caption data (`timedtext`). |
-| **`content.js`** | Injected into the YouTube video page. It requests the caption data, analyzes timestamps to find silent gaps, and interacts with the video player to perform the skips. |
+| **`manifest.json`** | The core configuration file. It defines permissions, registers scripts, and the user interface. |
+| **`background.js`** | A background script that intercepts network requests to capture YouTube's caption data URLs (`timedtext`). |
+| **`content.js`** | This script is injected into the video page. It gets the caption data, finds silent gaps, and controls the video player to perform skips. |
 | **`popup.html`** | The HTML file that defines the structure of the settings panel. |
-| **`popup.js`** | The JavaScript that controls the logic for the settings panel, including saving user preferences. |
-| **`shared-constants.js`** | Contains variables and constants shared between different scripts to maintain consistency. |
+| **`popup.js`** | The JavaScript logic for the settings panel, including saving user settings. |
+| **`shared-constants.js`** | Contains variables and constants shared across different scripts. |
 | **`toast.css`** | The stylesheet for on-screen notifications. |
 
 ---
 
 ## 🚀 Future Updates
 
-A feature is planned for a future release to provide **usage statistics**. This will include tracking the total amount of time saved by skipping silent segments across all videos, highlighting the extension's efficiency.
+A future update is planned to include **usage statistics**. This will track the total time saved by skipping silent segments across all videos.
