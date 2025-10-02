@@ -4,6 +4,19 @@
   # YouTube Skip Silence
 </div>
 
+[![Buy Me A Coffee](https://img.shields.io/badge/☕-Buy%20me%20a%20coffee-yellow?style=flat-square)](https://www.buymeacoffee.com/kur0)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20me-blue?style=flat-square&logo=ko-fi)](https://ko-fi.com/N4N41M2YUG)
+
+---
+
+## 🎬 Video Demonstration
+
+See **YouTube Skip Silence** in action! This short video demonstrates how the extension automatically detects and skips silent gaps in a video, saving you time.
+
+<div align="center">
+  <video src="./video.mp4" controls width="100%" poster="./icon.png"></video>
+</div>
+
 ---
 
 **YouTube Skip Silence** is a browser extension that detects and automatically skips silent portions of YouTube videos. It functions by analyzing the timestamps of a video's **auto-generated captions** to efficiently identify periods without speech.
@@ -22,6 +35,8 @@ The extension is designed to provide a seamless viewing experience by eliminatin
     * Enable or disable skipping entirely.
     * Define the **minimum duration of silence** that should be skipped.
     * Control whether skipping continues after the user manually seeks to a new point in the video.
+
+---
 
 ## 🛠️ Installation Guide
 
@@ -51,6 +66,8 @@ This extension is not yet available on official browser stores and must be **ins
 
 > **Note for Firefox Users:** Temporary add-ons are removed when Firefox is closed. The add-on must be loaded again each time the browser is restarted.
 
+---
+
 ## 📂 Project Structure
 
 For those interested in modifying or contributing to the code, here is an overview of the project's key file structure:
@@ -64,6 +81,8 @@ For those interested in modifying or contributing to the code, here is an overvi
 | **`popup.js`** | The JavaScript that controls the logic for the settings panel, including saving user preferences. |
 | **`shared-constants.js`** | Contains variables and constants shared between different scripts to maintain consistency. |
 | **`toast.css`** | The stylesheet for on-screen notifications. |
+
+---
 
 ## 🚀 Future Updates
 
