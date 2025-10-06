@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="./icon.png" alt="YouTube Skip Silence Logo" width="128" height="128"/>
-  
-  # YouTube Skip Silence
+  <img src="./icon.png" alt="YouTube Skip Silence Logo" width="128" height="128"/>
+  
+  # YouTube Skip Silence
 </div>
 
 [![Buy Me A Coffee](https://img.shields.io/badge/☕-Buy%20me%20a%20coffee-yellow?style=flat-square)](https://www.buymeacoffee.com/kur0)
@@ -14,14 +14,14 @@
 This GIF shows **YouTube Skip Silence** in action. The extension automatically detects and skips silent sections of a video.
 
 <div align="center">
-  <img src="./demonstration.gif" alt="YouTube Skip Silence Extension Demonstration GIF" width="600"/>
+  <img src="./demonstration.gif" alt="YouTube Skip Silence Extension Demonstration GIF" width="600"/>
 </div>
 
 ---
 
 **YouTube Skip Silence** is a browser extension that skips silent parts of YouTube videos. It works by analyzing the timestamps in a video's **auto-generated captions** to find periods with no speech.
 
-The extension is available for **Google Chrome** (and other Chromium browsers) and **Mozilla Firefox**.
+The extension is available for **Mozilla Firefox** and **Google Chrome** (and other Chromium browsers).
 
 ## ✨ Features
 
@@ -40,9 +40,15 @@ The extension is designed to remove dead air with simple configuration options:
 
 ## 🛠️ Installation Guide
 
-This extension is not available on official browser stores yet, so it must be **installed manually** using the "unpacked" method.
+### For Mozilla Firefox
+
+To install **YouTube Skip Silence** on Firefox, simply visit the official Firefox Add-ons page and download it directly:
+
+* **[Install on Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/youtube-skip-silence/)**
 
 ### For Google Chrome (and Chromium-based browsers)
+
+This extension is not yet available on the official Chrome Web Store, so it must be **installed manually** using the "unpacked" method.
 
 1.  **Download the Code:** Get the repository from GitHub as a ZIP file.
 2.  **Unzip the File:** Extract the ZIP file contents to a permanent folder. You will see two folders: `chrome` and `firefox`.
@@ -53,18 +59,6 @@ This extension is not available on official browser stores yet, so it must be **
     * Select the **`chrome`** folder from your unzipped files.
     * Click "Select Folder".
     * The extension is now installed and active.
-
-### For Mozilla Firefox
-
-1.  **Download the Code:** Get the repository from GitHub as a ZIP file.
-2.  **Unzip the File:** Extract the ZIP file contents to a folder on your computer.
-3.  **Open Firefox Debugging:** Go to `about:debugging#/runtime/this-firefox` in your address bar.
-4.  **Load Temporary Add-on:**
-    * Click the **"Load Temporary Add-on..."** button.
-    * Navigate into the unzipped **`firefox`** folder.
-    * Select the **`manifest.json`** file and click "Open".
-
-> **Note for Firefox Users:** Temporary add-ons are removed when Firefox closes. You must load the add-on again each time the browser restarts.
 
 ---
 
