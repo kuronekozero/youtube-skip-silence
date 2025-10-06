@@ -1,5 +1,7 @@
 <div align="center">
   <img src="./icon.png" alt="YouTube Skip Silence Logo" width="128" height="128"/>
+   
+# YouTube Skip Silence
 </div>
 
 [![Buy Me A Coffee](https://img.shields.io/badge/☕-Buy%20me%20a%20coffee-yellow?style=flat-square)](https://www.buymeacoffee.com/kur0)
